@@ -1,0 +1,16 @@
+[Unit]
+Description=My Rocket application for your-domain.tld
+
+[Service]
+User=www-data
+Group=www-data
+# The user www-data should probably own that directory
+WorkingDirectory=/home/ec2-user/video-process/apiserver
+Environment="ROCKET_ENV=prod"
+Environment="ROCKET_ADDRESS=127.0.0.1"
+Environment="ROCKET_PORT=1337"
+Environment="ROCKET_LOG=critical"
+ExecStart=/home/ec2-user/video-process/apiserver/apiserver
+
+[Install]
+WantedBy=multi-user.target

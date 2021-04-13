@@ -1,0 +1,40 @@
+cargo-features = ["edition2021"]
+
+[package]
+name = "license_data_manager"
+version = "0.1.0"
+authors = ["Thuan <thuanvh@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = "0.4.7"
+rocket_contrib = "0.4"
+# rusqlite = "0.24.2"
+uuid = { version = "0.8", features = ["serde", "v4"] }
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
+#diesel = { git = "https://github.com/diesel-rs/diesel", features = ["postgres", "chrono"] }
+# diesel_codegen = { git = "https://github.com/diesel-rs/diesel", features = ["postgres"] }
+diesel = { version = "1.4.6", features = ["postgres","chrono"] }
+r2d2-diesel = "1.0.0"
+r2d2 = "0.8.9"
+#r2d2-diesel = { git = "https://github.com/diesel-rs/diesel"}
+#r2d2 = { git = "https://github.com/diesel-rs/diesel", features = ["postgres"] }
+env_logger = "0.5.12"
+log = "0.4.6"
+dotenv = "0.15.0"
+chrono = { version = "0.4", features = ["serde"] }
+
+
+#[dependencies.rocket_contrib]
+#version = "*"
+#default-features = false
+#features = ["json"]
+
+#[patch.crates-io]
+#diesel = { git = "https://github.com/diesel-rs/diesel.git" }
+#diesel_infer_schema = { git = "https://github.com/diesel-rs/diesel.git" }
+#diesel_codegen = { git = "https://github.com/diesel-rs/diesel.git" }
