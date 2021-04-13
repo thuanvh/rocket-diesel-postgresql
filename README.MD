@@ -15,3 +15,5 @@ psql postgresql://postgres:1234@localhost:5432/postgres
 
 diesel setup
 
+Reference:
+https://github.com/genekuo/rust-microservices.git
