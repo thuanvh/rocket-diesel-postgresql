@@ -14,6 +14,15 @@ pub fn create_routes() {
                     sample::handler::delete_license
                     ],
         )
+        .mount("/customers",
+               routes![
+                    sample::handler::all_customers,
+                    sample::handler::create_customer,
+                    sample::handler::get_customer,
+                    sample::handler::update_customer,
+                    sample::handler::delete_customer
+                    ],
+        )
         .mount("/customer_licenses",
                routes![
                     sample::handler::all_customer_licenses,

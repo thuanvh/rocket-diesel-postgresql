@@ -4,12 +4,47 @@ use diesel::prelude::*;
 
 use crate::sample::model::License;
 use crate::sample::model::NewLicense;
+use crate::sample::model::Customer;
+use crate::sample::model::NewCustomer;
 use crate::sample::model::CustomerLicense;
 use crate::sample::model::NewCustomerLicense;
+use crate::schema::customer;
+use crate::schema::customer::dsl::*;
 use crate::schema::license;
 use crate::schema::license::dsl::*;
 use crate::schema::customer_license;
 use crate::schema::customer_license::dsl::*;
+
+pub fn create_customer(new_customer: NewCustomer, connection: &PgConnection) -> QueryResult<Customer> {
+    diesel::insert_into(customer::table)
+        .values(&new_customer)
+        .get_result::<Customer>(connection)
+}
+
+pub fn show_customers(connection: &PgConnection) -> QueryResult<Vec<Customer>>  {
+    //posts.filter(published.eq(true))
+    
+    //customer.limit(5)
+    //    .load::<Customer>(&*connection)
+    customer
+        .load::<Customer>(&*connection)
+}
+
+pub fn get_customer(customer_id_var: i32, connection: &PgConnection) -> QueryResult<Customer> {
+    customer::table.find(customer_id_var).get_result::<Customer>(connection)
+}
+
+pub fn update_customer(customer_id_var: i32, customer_var: Customer, connection: &PgConnection) -> QueryResult<Customer> {
+    diesel::update(customer::table.find(customer_id_var))
+        .set(&customer_var)
+        .get_result::<Customer>(connection)
+}
+
+pub fn delete_customer(customer_id_var: i32, connection: &PgConnection) -> QueryResult<usize> {
+    diesel::delete(customer::table.find(customer_id_var))
+        .execute(connection)
+}
+
 
 pub fn create_license(new_license: NewLicense, connection: &PgConnection) -> QueryResult<License> {
     diesel::insert_into(license::table)
