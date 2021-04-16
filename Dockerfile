@@ -12,8 +12,9 @@ COPY ./diesel.toml ./diesel.toml
 # RUN rm ./target/debug/deps/license-data-manager*
 RUN cargo build
 RUN ls /license-data-manager/target/debug/
+
 FROM buildpack-deps:stretch
 
 COPY --from=builder /license-data-manager/target/debug/license_data_manager /app/
 
-ENTRYPOINT ["/app/license_data_manager"]
+CMD ["/app/license_data_manager"]
