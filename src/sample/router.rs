@@ -28,6 +28,8 @@ pub fn create_routes() {
                     sample::handler::all_customer_licenses,
                     sample::handler::create_customer_license,
                     sample::handler::get_customer_license,
+                    sample::handler::get_customer_license_by_customer_id,
+                    sample::handler::get_customer_license_by_license_id,
                     sample::handler::update_customer_license,
                     sample::handler::delete_customer_license
                     ],

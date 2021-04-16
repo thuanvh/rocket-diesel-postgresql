@@ -96,6 +96,12 @@ pub fn show_customer_licenses(connection: &PgConnection) -> QueryResult<Vec<Cust
 pub fn get_customer_license(customer_license_id: i32, connection: &PgConnection) -> QueryResult<CustomerLicense> {
     customer_license::table.find(customer_license_id).get_result::<CustomerLicense>(connection)
 }
+pub fn get_customer_license_by_customer_id(customer_id_val: i32, connection: &PgConnection) -> QueryResult<Vec<CustomerLicense>>{
+    customer_license::table.filter(customer_id.eq(customer_id_val)).load::<CustomerLicense>(*&connection)
+}
+pub fn get_customer_license_by_license_id(license_id_val: i32, connection: &PgConnection) -> QueryResult<Vec<CustomerLicense>> {
+    customer_license::table.filter(license_id.eq(license_id_val)).load::<CustomerLicense>(*&connection)
+}
 
 pub fn update_customer_license(customer_license_id: i32, customer_license_var: CustomerLicense, connection: &PgConnection) -> QueryResult<CustomerLicense> {
     diesel::update(customer_license::table.find(customer_license_id))

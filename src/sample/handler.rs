@@ -115,6 +115,19 @@ pub fn get_customer_license(id: i32, connection: DbConn) -> Result<Json<Customer
         .map(|customer_license| Json(customer_license))
         .map_err(|error| error_status(error))
 }
+#[get("/customer/<customer_id>")]
+pub fn get_customer_license_by_customer_id(customer_id: i32, connection: DbConn) -> Result<Json<Vec<CustomerLicense>>, Status> {
+    sample::repository::get_customer_license_by_customer_id(customer_id, &connection)
+        .map(|customer_license| Json(customer_license))
+        .map_err(|error| error_status(error))
+}
+#[get("/license/<license_id>")]
+pub fn get_customer_license_by_license_id(license_id: i32, connection: DbConn) -> Result<Json<Vec<CustomerLicense>>, Status> {
+    sample::repository::get_customer_license_by_license_id(license_id, &connection)
+        .map(|customer_license| Json(customer_license))
+        .map_err(|error| error_status(error))
+}
+
 #[put("/<id>", format = "application/json", data = "<customer_license>")]
 pub fn update_customer_license(id: i32, customer_license: Json<CustomerLicense>, connection: DbConn) -> Result<Json<CustomerLicense>, Status> {
     sample::repository::update_customer_license(id, customer_license.into_inner(), &connection)
