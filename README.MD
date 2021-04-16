@@ -15,5 +15,15 @@ psql postgresql://postgres:1234@localhost:5432/postgres
 
 diesel setup
 
+sudo docker build . -t license_data_manager
+sudo docker run -it license_data_manager -e RUST_BACKTRACE=1 \ 
+-e RUST_LOG=debug \
+-e ROCKET_ADDRESS=0.0.0.0 \
+-e ROCKET_PORT=8000 \
+-e DATABASE_URL=postgresql://postgres:1234@localhost:5432/license_db 
+
+docker-compose up -d
+
+
 Reference:
 https://github.com/genekuo/rust-microservices.git

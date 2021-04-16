@@ -9,11 +9,11 @@ RUN rm src/*.rs
 COPY ./src ./src
 COPY ./migrations ./migrations
 COPY ./diesel.toml ./diesel.toml
-RUN rm ./target/debug/deps/license-data-manager*
+# RUN rm ./target/debug/deps/license-data-manager*
 RUN cargo build
-
+RUN ls /license-data-manager/target/debug/
 FROM buildpack-deps:stretch
 
-COPY --from=builder /license-data-manager/target/debug/license-data-manager /app/
+COPY --from=builder /license-data-manager/target/debug/license_data_manager /app/
 
-ENTRYPOINT ["/app/license-manager"]
+ENTRYPOINT ["/app/license_data_manager"]

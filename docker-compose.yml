@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  # db:
+  #   #image: postgres:9.6-alpine
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=username
+  #     - POSTGRES_PASSWORD=password
+  #     - POSTGRES_DB=postgres
+  #   ports:
+  #     - 5432:5432
+
+  license_data_manager:
+    build: .
+    #depends_on:
+    #  - db
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=debug
+      - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_PORT=8000
+      - DATABASE_URL=postgresql://postgres:1234@localhost:5432/license_db
+    ports:
+      - "8000:8000"
