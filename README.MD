@@ -9,7 +9,7 @@ echo DATABASE_URL=postgres://username:password@localhost/diesel_demo > .env
 docker-compose -f stack.yml up
 
 docker run --rm -P -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD="1234" --name pg postgres:alpine
-docker run -d -P -p 0.0.0.0:5432:5432 -e POSTGRES_PASSWORD="1234" --name pg postgres:alpine
+docker run -d --network=host -P -p 0.0.0.0:5432:5432 -e POSTGRES_PASSWORD="1234" --name pg postgres:alpine
 
 psql postgresql://postgres:1234@localhost:5432/postgres
 
@@ -28,9 +28,9 @@ docker container inspect pg1
 sudo docker run -d -e RUST_BACKTRACE=1 \
 -e RUST_LOG=debug \
 -e ROCKET_ADDRESS=0.0.0.0 \
--e ROCKET_PORT=8000 \
+-e ROCKET_PORT=8100 \
 -e DATABASE_URL=postgresql://postgres:1234@172.17.0.2:5432/license_db \
--it leo5th/slm:1.1 
+--name license_data_manager -p 0.0.0.0:8100:8100 -it leo5th/slm:1.1 
 
 docker-compose up -d
 
