@@ -22,6 +22,14 @@ sudo docker run -it license_data_manager -e RUST_BACKTRACE=1 \
 -e ROCKET_PORT=8000 \
 -e DATABASE_URL=postgresql://postgres:1234@localhost:5432/license_db 
 
+docker container inspect pg1
+sudo docker run -e RUST_BACKTRACE=1 \
+-e RUST_LOG=debug \
+-e ROCKET_ADDRESS=0.0.0.0 \
+-e ROCKET_PORT=8000 \
+-e DATABASE_URL=postgresql://postgres:1234@172.17.0.2:5432/license_db \
+-it license_data_manager 
+
 docker-compose up -d
 
 
